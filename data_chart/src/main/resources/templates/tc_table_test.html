@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tokyo Cabinet数据库测试数据</title>
+    <script type="text/javascript" src="/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/datatables.js"></script>
+    <link href="/datatables.css" rel="stylesheet">
+</head>
+<body>
+
+<table id="tc_table_test" class="row-border" style="width:100%">
+    <thead>
+    <tr>
+        <th>操作</th>
+        <th>20000</th>
+        <th>40000</th>
+        <th>60000</th>
+        <th>80000</th>
+        <th>100000</th>
+        <th>120000</th>
+        <th>140000</th>
+        <th>160000</th>
+        <th>200000</th>
+        <th>400000</th>
+        <th>600000</th>
+        <th>800000</th>
+        <th>1000000</th>
+    </tr>
+    </thead>
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $("#tc_table_test").DataTable({
+            "ajax": '/tcTableTestData'
+        });
+    });
+</script>
+</body>
+</html>

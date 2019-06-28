@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比较数据库添加性能</title>
+    <script type="text/javascript" src="/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/echarts.min.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 100%;height:700px;"></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.getJSON(
+            "/readData",
+            function (data) {
+                console.log(data);
+
+                var option = {
+                    title: {
+                        text: '数据库读取性能'
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['levelDB','RocksDB','Tokyo Cabinet','BerkeleyDB','Redis']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['20000','40000','60000','80000','100000', '120000']
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name:'Tokyo Cabinet',
+                            type:'line',
+                            // stack: '总量',
+                            data: data['tc']
+                        },
+                        {
+                            name:'BerkeleyDB',
+                            type:'line',
+                            // stack: '总量',
+                            data: data['bdb']
+                        },
+                        {
+                            name:'RocksDB',
+                            type:'line',
+                            // stack: '总量',
+                            data: data['rocksDB']
+                        },
+                        {
+                            name:'Redis',
+                            type:'line',
+                            // stack: '总量',
+                            data: data['redis']
+                        },
+                        {
+                            name:'levelDB',
+                            type:'line',
+                            // stack: '总量',
+                            data: data['levelDB']
+                        }
+                    ]
+                };
+
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+
+            }
+        );
+    });
+</script>
+</body>
+</html>

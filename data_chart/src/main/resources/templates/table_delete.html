@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库添加测试数据</title>
+    <script type="text/javascript" src="/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/datatables.js"></script>
+    <link href="/datatables.css" rel="stylesheet">
+</head>
+<body>
+
+<table id="table_delete" class="row-border" style="width:100%">
+    <thead>
+    <tr>
+        <th>DataBase</th>
+        <th>20000</th>
+        <th>40000</th>
+        <th>60000</th>
+        <th>80000</th>
+        <th>100000</th>
+        <th>120000</th>
+    </tr>
+    </thead>
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $("#table_delete").DataTable({
+            "ajax": '/tableDeleteData'
+        });
+    });
+</script>
+</body>
+</html>
